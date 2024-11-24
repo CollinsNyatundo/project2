@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "Data Science Portfolio Assets",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
