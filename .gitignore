@@ -42,5 +42,4 @@ dist-ssr
 
 # Misc
 *.pem
-.DS_Store
 Thumbs.db
