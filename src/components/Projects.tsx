@@ -6,7 +6,7 @@ const projects = [
   {
     title: 'Customer Churn Analysis',
     description: 'Analyzed customer churn patterns using Python and machine learning algorithms to identify key factors affecting customer retention.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    image: 'https://www.shutterstock.com/image-photo/customer-churn-shown-using-text-600nw-2443621059.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     tags: ['Python', 'Machine Learning', 'Data Analysis'],
     icon: LineChart,
     github: 'https://github.com/CollinsNyatundo/BCG-customer-churn-visualization'
