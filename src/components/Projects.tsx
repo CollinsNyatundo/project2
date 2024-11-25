@@ -14,7 +14,7 @@ const projects = [
   {
     title: 'Revenue Analysis Dashboard',
     description: 'Built an interactive dashboard for historical revenue analysis using Power BI and SQL for data processing.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+        image: 'https://www.shutterstock.com/shutterstock/videos/3495967415/thumb/12.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     tags: ['Power BI', 'SQL', 'Data Visualization'],
     icon: Database,
     github: 'https://github.com/CollinsNyatundo/Analyzing-Historical-Revenue-Data-and-Building-a-Dashboard'
