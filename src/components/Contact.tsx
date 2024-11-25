@@ -47,26 +47,45 @@ const Contact = () => {
           </motion.div>
 
           <motion.form
+            action="https://formspree.io/f/meqybazj"
+            method="POST"
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 100 }}
             className="space-y-6"
           >
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-300">Name</label>
-              <input type="text" id="name" name="name" className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500" />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500 text-white"
+              />
             </div>
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-300">Email</label>
-              <input type="email" id="email" name="email" className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500" />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500 text-white"
+              />
             </div>
             <div>
               <label htmlFor="message" className="block text-sm font-medium text-gray-300">Message</label>
-              <textarea id="message" name="message" rows={4} className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500"></textarea>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500 text-white"
+              ></textarea>
             </div>
             <div>
-              <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+              <button
+                type="submit"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+              >
                 Send Message
               </button>
             </div>
