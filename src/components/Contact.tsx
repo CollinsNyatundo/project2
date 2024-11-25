@@ -1,8 +1,61 @@
-import React from 'react';
-import { motion } from 'framer-motion';
 import { Phone, Mail, Github, Linkedin } from 'lucide-react';
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('https://formspree.io/f/meqybazj', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Clear form fields
+        setFormData({ name: '', email: '', message: '' });
+
+        // Show success message
+        toast.success('Thank you! Message Sent', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          className: 'bg-gray-800 text-white rounded-md',
+        });
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast.error('Failed to send message. Please try again later.', {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        className: 'bg-gray-800 text-white rounded-md',
+      });
+    }
+  };
+
   return (
     <section id="contact" className="py-20 bg-gray-900">
       <div className="container mx-auto px-4">
@@ -47,12 +100,12 @@ const Contact = () => {
           </motion.div>
 
           <motion.form
-            action="https://formspree.io/f/meqybazj"
-            method="POST"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: 'spring', stiffness: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
             className="space-y-6"
+            onSubmit={handleSubmit}
           >
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-300">Name</label>
@@ -60,7 +113,9 @@ const Contact = () => {
                 type="text"
                 id="name"
                 name="name"
-                className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500 text-white"
+                value={formData.name}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 px-4 py-3 text-lg"
               />
             </div>
             <div>
@@ -69,7 +124,9 @@ const Contact = () => {
                 type="email"
                 id="email"
                 name="email"
-                className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500 text-white"
+                value={formData.email}
+                onChange={handleChange}
+                className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 px-4 py-3 text-lg"
               />
             </div>
             <div>
@@ -77,21 +134,19 @@ const Contact = () => {
               <textarea
                 id="message"
                 name="message"
+                value={formData.message}
+                onChange={handleChange}
                 rows={4}
-                className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500 text-white"
-              ></textarea>
+                className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 shadow-sm focus:border-purple-500 focus:ring-purple-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900"
+              />
             </div>
-            <div>
-              <button
-                type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
-              >
-                Send Message
-              </button>
-            </div>
+            <button type="submit" className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700">
+              Send Message
+            </button>
           </motion.form>
         </div>
       </div>
+      <ToastContainer />
     </section>
   );
 };
