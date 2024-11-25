@@ -15,32 +15,34 @@ import BlogEditor from './components/admin/BlogEditor';
 function App() {
   return (
     <Router>
-      <Routes>
-        {/* Public Routes */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Navbar />
-              <Hero />
-              <About />
-              <Projects />
-              <Blog />
-              <Contact />
-            </>
-          }
-        />
-        <Route path="/blog/:slug" element={<BlogDetail />} />
+      <div className="app-container">
+        <Navbar />
+        <Routes>
+          {/* Public Routes */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <About />
+                <Projects />
+                <Blog />
+                <Contact />
+              </>
+            }
+          />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
 
-        {/* Admin Routes */}
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<PostList />} />
-          <Route path="posts" element={<PostList />} />
-          <Route path="posts/new" element={<BlogEditor />} />
-          <Route path="posts/:id/edit" element={<BlogEditor />} />
-        </Route>
-      </Routes>
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<PostList />} />
+            <Route path="posts" element={<PostList />} />
+            <Route path="posts/new" element={<BlogEditor />} />
+            <Route path="posts/:id/edit" element={<BlogEditor />} />
+          </Route>
+        </Routes>
+      </div>
     </Router>
   );
 }
