@@ -5,7 +5,7 @@
   --secondary-color: #f3f4f6; /* Tailwind's gray-100 */
   --text-color: #e5e7eb; /* Tailwind's gray-300 */
   --hover-text-color: #ffffff; /* White */
-  --transition-duration: 10ms;
+  --transition-duration: 0ms;
 }
 
 
