@@ -65,7 +65,6 @@ The portfolio aims to:
 - **Netlify**: Alternative hosting platform with CI/CD capabilities.
 - **PostCSS**: v8.4.21 – Processes CSS for compatibility and performance.
 - **ESLint**: v8.49.0 – Enforces code quality and consistency.
-- **Prettier**: v3.0.0 – Formats code for readability and style.
 
 ---
 
