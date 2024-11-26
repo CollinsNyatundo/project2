@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Brain, ChevronDown } from 'lucide-react';
+import { Link } from 'react-scroll';
 
 const Hero = () => {
   return (
@@ -42,18 +43,22 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="flex justify-center gap-4"
           >
-            <a
-              href="#projects"
-              className="bg-purple-600 text-white px-8 py-3 rounded-full font-medium hover:bg-purple-700 transition-colors"
+            <Link
+              to="projects"
+              smooth={true}
+              duration={500}
+              className="bg-purple-600 text-white px-8 py-3 rounded-full font-medium hover:bg-purple-700 transition-colors cursor-pointer"
             >
               View Projects
-            </a>
-            <a
-              href="#contact"
-              className="border border-purple-600 text-white px-8 py-3 rounded-full font-medium hover:bg-purple-600/10 transition-colors"
+            </Link>
+            <Link
+              to="contact"
+              smooth={true}
+              duration={500}
+              className="border border-purple-600 text-white px-8 py-3 rounded-full font-medium hover:bg-purple-600/10 transition-colors cursor-pointer"
             >
               Contact Me
-            </a>
+            </Link>
           </motion.div>
         </div>
       </div>
@@ -63,7 +68,9 @@ const Hero = () => {
         transition={{ duration: 2, repeat: Infinity }}
         className="absolute bottom-8"
       >
-        <ChevronDown className="w-8 h-8 text-white/50" />
+        <Link to="about" smooth={true} duration={500} className="cursor-pointer">
+          <ChevronDown className="w-8 h-8 text-white/50" />
+        </Link>
       </motion.div>
 
       <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
