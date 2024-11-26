@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, LineChart, HeartPulse, Database, Film, Users } from 'lucide-react';
 
@@ -98,6 +98,14 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0], index: n
 };
 
 const Projects = () => {
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+
+  const filteredProjects = selectedTag
+    ? projects.filter((project) => project.tags.includes(selectedTag))
+    : projects;
+
+  const uniqueTags = Array.from(new Set(projects.flatMap((project) => project.tags)));
+
   return (
     <section id="projects" className="py-20 bg-gray-900">
       <div className="container mx-auto px-4">
@@ -112,8 +120,22 @@ const Projects = () => {
           <div className="w-20 h-1 bg-purple-600 mx-auto"></div>
         </motion.div>
 
+        <div className="flex justify-center mb-8">
+          {uniqueTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
+              className={`px-4 py-2 mx-2 rounded ${
+                selectedTag === tag ? 'bg-purple-600 text-white' : 'bg-gray-700 text-gray-300'
+              } transition-colors`}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+
         <div className="grid md:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <ProjectCard key={index} project={project} index={index} />
           ))}
         </div>
