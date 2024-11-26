@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Github, LineChart, HeartPulse, Database, Film } from 'lucide-react';
+import { Github, LineChart, HeartPulse, Database, Film, Users } from 'lucide-react';
 
 const projects = [
   {
@@ -14,7 +14,7 @@ const projects = [
   {
     title: 'Revenue Analysis Dashboard',
     description: 'Built an interactive dashboard for historical revenue analysis using Power BI and SQL for data processing.',
-        image: 'https://www.shutterstock.com/shutterstock/videos/3495967415/thumb/12.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    image: 'https://www.shutterstock.com/shutterstock/videos/3495967415/thumb/12.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     tags: ['Power BI', 'SQL', 'Data Visualization'],
     icon: Database,
     github: 'https://github.com/CollinsNyatundo/Analyzing-Historical-Revenue-Data-and-Building-a-Dashboard'
@@ -34,6 +34,14 @@ const projects = [
     tags: ['Python', 'Data Analysis', 'Visualization'],
     icon: Film,
     github: 'https://github.com/CollinsNyatundo/Best-Streaming-Service-Analysis'
+  },
+  {
+    title: 'Bank Customer Segmentation',
+    description: 'Implemented customer segmentation for a bank using clustering algorithms to personalize marketing strategies and improve customer satisfaction.',
+    image: 'https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    tags: ['Python', 'Machine Learning', 'Clustering'],
+    icon: Users,
+    github: 'https://github.com/CollinsNyatundo/Bank-Customer-Segmentation-and-Personalization'
   }
 ];
 
