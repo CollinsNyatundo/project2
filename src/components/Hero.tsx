@@ -4,7 +4,7 @@ import { Brain, ChevronDown } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
+    <section id="home" className="min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900">
       <div className="absolute inset-0 w-full h-full bg-grid" />
 
       <div className="container mx-auto px-4 z-10">
