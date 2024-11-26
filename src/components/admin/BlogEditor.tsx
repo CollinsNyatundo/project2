@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Upload, X } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
+import styles from './BlogEditor.module.css';
 
 interface BlogPostForm {
   title: string;
@@ -15,6 +16,8 @@ const BlogEditor = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<BlogPostForm>();
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const navigate = useNavigate();
+  const [cursorPosition, setCursorPosition] = useState<number>(0);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     accept: {
@@ -35,6 +38,17 @@ const BlogEditor = () => {
       console.error('Error creating post:', error);
     }
   };
+
+  const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCursorPosition(e.target.selectionStart);
+  };
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      const { current: textarea } = textareaRef;
+      textarea.style.setProperty('--cursor-position', `${cursorPosition}ch`);
+    }
+  }, [cursorPosition]);
 
   return (
     <div className="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
@@ -135,7 +149,10 @@ const BlogEditor = () => {
             <textarea
               {...register('content', { required: 'Content is required' })}
               rows={12}
-              className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500 font-mono"
+              ref={textareaRef}
+              onChange={handleContentChange}
+              onSelect={handleContentChange}
+              className={`mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500 font-mono ${styles.contentTextarea}`}
             />
             {errors.content && (
               <p className="mt-1 text-sm text-red-500">{errors.content.message}</p>
