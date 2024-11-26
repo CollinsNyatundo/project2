@@ -1,9 +1,6 @@
-import React, { useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Github, LineChart, HeartPulse, Database, Film, Users, ExternalLink, Search, Grid, List } from 'lucide-react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
-import ReactTooltip from 'react-tooltip';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Github, LineChart, HeartPulse, Database, Film, Users, Search } from 'lucide-react';
 
 const projects = [
   {
@@ -53,35 +50,33 @@ const projects = [
   }
 ];
 
-const ProjectCard = ({ project, index, onViewMore }: { project: typeof projects[0]; index: number; onViewMore: (project: typeof projects[0]) => void }) => {
+const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
   const Icon = project.icon;
 
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="bg-gray-800 rounded-xl overflow-hidden group hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+      viewport={{ once: true }}
+      className="bg-gray-800 rounded-xl overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-300"
     >
       <div className="relative h-48 overflow-hidden">
-        <LazyLoadImage
+        <img
           src={project.image}
           alt={`Image for ${project.title}`}
-          effect="blur"
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-          onError={(e: any) => (e.target.src = '/path/to/fallback-image.jpg')}
+          onError={(e) => (e.currentTarget.src = 'path/to/fallback-image.jpg')}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-70" />
-        <Icon className="absolute bottom-4 left-4 w-8 h-8 text-white" data-tip={project.category} />
-        <ReactTooltip />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent" />
+        <Icon className="absolute bottom-4 left-4 w-8 h-8 text-white" />
       </div>
 
       <div className="p-6">
         <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
           {project.title}
         </h3>
-        <p className="text-gray-400 mb-4 line-clamp-3">{project.description}</p>
+        <p className="text-gray-400 mb-4">{project.description}</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map((tag, index) => (
@@ -97,19 +92,10 @@ const ProjectCard = ({ project, index, onViewMore }: { project: typeof projects[
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
-            aria-label={`View ${project.title} on GitHub`}
           >
             <Github className="w-4 h-4" />
             GitHub
           </a>
-          <button
-            className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
-            onClick={() => onViewMore(project)}
-            aria-label={`View more details about ${project.title}`}
-          >
-            <ExternalLink className="w-4 h-4" />
-            View More
-          </button>
         </div>
       </div>
     </motion.article>
@@ -119,7 +105,6 @@ const ProjectCard = ({ project, index, onViewMore }: { project: typeof projects[
 const Projects = () => {
   const [filter, setFilter] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
-  const [isGridView, setIsGridView] = useState(true);
   const categories = ['All', 'Data Analysis', 'Data Visualization', 'Machine Learning'];
 
   const filteredProjects = projects
@@ -129,11 +114,6 @@ const Projects = () => {
       project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
       project.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
     );
-
-  const handleViewMore = useCallback((project: typeof projects[0]) => {
-    // Implement modal or navigation to project details page
-    console.log('View more:', project);
-  }, []);
 
   return (
     <section id="projects" className="py-20 bg-gray-900">
@@ -158,7 +138,6 @@ const Projects = () => {
                     ? 'bg-purple-600 text-white'
                     : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
                 }`}
-                aria-label={`Filter projects by ${category}`}
               >
                 {category}
               </button>
@@ -173,32 +152,21 @@ const Projects = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="bg-gray-800 text-white px-4 py-2 pl-10 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-600"
-                aria-label="Search projects"
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             </div>
-            <button
-              onClick={() => setIsGridView(!isGridView)}
-              className="ml-4 text-gray-400 hover:text-white transition-colors"
-              aria-label={`Switch to ${isGridView ? 'list' : 'grid'} view`}
-            >
-              {isGridView ? <List /> : <Grid />}
-            </button>
           </div>
         </motion.div>
 
-        <AnimatePresence>
-          <motion.div
-            className={`${isGridView ? 'grid md:grid-cols-2 lg:grid-cols-3 gap-8' : 'space-y-8'}`}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            {filteredProjects.map((project, index) => (
-              <ProjectCard key={project.title} project={project} index={index} onViewMore={handleViewMore} />
-            ))}
-          </motion.div>
-        </AnimatePresence>
+        <motion.div
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          {filteredProjects.map((project, index) => (
+            <ProjectCard key={project.title} project={project} index={index} />
+          ))}
+        </motion.div>
 
         {filteredProjects.length === 0 && (
           <motion.p
