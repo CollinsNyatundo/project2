@@ -22,7 +22,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
           >
             Collins Nyagaka
           </motion.h1>
@@ -31,7 +31,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-xl md:text-2xl text-gray-300 mb-8"
+            className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-8"
           >
             Data Scientist & ML Engineer
           </motion.p>
@@ -40,17 +40,17 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex justify-center gap-4"
+            className="flex flex-col sm:flex-row justify-center gap-4"
           >
             <a
               href="#projects"
-              className="bg-purple-600 text-white px-8 py-3 rounded-full font-medium hover:bg-purple-700 transition-colors"
+              className="bg-purple-600 text-white px-6 py-3 rounded-full font-medium hover:bg-purple-700 transition-colors"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="border border-purple-600 text-white px-8 py-3 rounded-full font-medium hover:bg-purple-600/10 transition-colors"
+              className="border border-purple-600 text-white px-6 py-3 rounded-full font-medium hover:bg-purple-600/10 transition-colors"
             >
               Contact Me
             </a>
