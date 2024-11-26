@@ -42,7 +42,7 @@ const projects = [
   {
     title: 'Bank Customer Segmentation',
     description: 'Implemented customer segmentation for a bank using clustering algorithms to personalize marketing strategies and improve customer satisfaction.',
-    image: 'https://images.unsplash.com/photo-1601597111158-2fceff292cdc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+    image: 'https://st2.depositphotos.com/4428871/9888/i/450/depositphotos_98881588-stock-photo-customer-word-cloud.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
     tags: ['Python', 'Machine Learning', 'Clustering'],
     icon: Users,
     github: 'https://github.com/CollinsNyatundo/Bank-Customer-Segmentation-and-Personalization',
