@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { Search } from 'lucide-react';
-import { ProjectContext } from '../context/ProjectContext'; // Import the ProjectContext
+import { ProjectContext } from '../context/ProjectContext';
 import ProjectCard from '../components/admin/ProjectCard';
 
 const AllProjects = () => {
