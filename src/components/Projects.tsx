@@ -93,7 +93,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
           >
-            <Github className="w-4 h-4" />
+            <Github className="w-5 h-5" /> {/* Set a consistent size for the GitHub icon */}
             GitHub
           </a>
         </div>
