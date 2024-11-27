@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Upload, X } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
-import styles from './BlogEditor.module.css';
 
 interface BlogPostForm {
   title: string;
@@ -31,7 +30,6 @@ const BlogEditor = () => {
 
   const onSubmit = async (data: BlogPostForm) => {
     try {
-      // Here we would typically upload the image and save the post
       console.log('Submitting post:', { ...data, coverImage });
       navigate('/admin/posts');
     } catch (error) {
@@ -50,6 +48,10 @@ const BlogEditor = () => {
     }
   }, [cursorPosition]);
 
+  const inputClass = "w-full px-5 py-3 text-base text-white placeholder-gray-500 transition duration-500 ease-in-out transform bg-gray-800 border border-transparent rounded-lg focus:border-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2 focus:ring-offset-gray-900";
+  const labelClass = "text-white text-sm font-bold mb-2";
+  const errorClass = "mt-1 text-sm text-red-500";
+
   return (
     <div className="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -59,55 +61,41 @@ const BlogEditor = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-300">
-              Title
-            </label>
+            <label htmlFor="title" className={labelClass}>Title</label>
             <input
               {...register('title', { required: 'Title is required' })}
               type="text"
-              className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500"
+              className={inputClass}
             />
-            {errors.title && (
-              <p className="mt-1 text-sm text-red-500">{errors.title.message}</p>
-            )}
+            {errors.title && <p className={errorClass}>{errors.title.message}</p>}
           </div>
 
           <div>
-            <label htmlFor="category" className="block text-sm font-medium text-gray-300">
-              Category
-            </label>
+            <label htmlFor="category" className={labelClass}>Category</label>
             <select
               {...register('category', { required: 'Category is required' })}
-              className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500"
+              className={inputClass}
             >
               <option value="">Select a category</option>
               <option value="Machine Learning">Machine Learning</option>
               <option value="Data Science">Data Science</option>
               <option value="Data Visualization">Data Visualization</option>
             </select>
-            {errors.category && (
-              <p className="mt-1 text-sm text-red-500">{errors.category.message}</p>
-            )}
+            {errors.category && <p className={errorClass}>{errors.category.message}</p>}
           </div>
 
           <div>
-            <label htmlFor="excerpt" className="block text-sm font-medium text-gray-300">
-              Excerpt
-            </label>
+            <label htmlFor="excerpt" className={labelClass}>Excerpt</label>
             <textarea
               {...register('excerpt', { required: 'Excerpt is required' })}
               rows={3}
-              className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500"
+              className={inputClass}
             />
-            {errors.excerpt && (
-              <p className="mt-1 text-sm text-red-500">{errors.excerpt.message}</p>
-            )}
+            {errors.excerpt && <p className={errorClass}>{errors.excerpt.message}</p>}
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
-              Cover Image
-            </label>
+            <label className={labelClass}>Cover Image</label>
             <div
               {...getRootProps()}
               className={`border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors
@@ -143,33 +131,30 @@ const BlogEditor = () => {
           </div>
 
           <div>
-            <label htmlFor="content" className="block text-sm font-medium text-gray-300">
-              Content
-            </label>
+            <label htmlFor="content" className={labelClass}>Content</label>
             <textarea
               {...register('content', { required: 'Content is required' })}
               rows={12}
               ref={textareaRef}
               onChange={handleContentChange}
               onSelect={handleContentChange}
-              className={`mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500 font-mono ${styles.contentTextarea}`}
+              className={`${inputClass} font-mono resize-none`}
+              placeholder="Write your blog post content here..."
             />
-            {errors.content && (
-              <p className="mt-1 text-sm text-red-500">{errors.content.message}</p>
-            )}
+            {errors.content && <p className={errorClass}>{errors.content.message}</p>}
           </div>
 
           <div className="flex justify-end space-x-4">
             <button
               type="button"
               onClick={() => navigate('/admin/posts')}
-              className="px-4 py-2 border border-gray-700 rounded-md text-gray-300 hover:bg-gray-800"
+              className="px-6 py-3 border border-gray-700 rounded-md text-gray-300 hover:bg-gray-800 transition duration-300"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"
+              className="px-6 py-3 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition duration-300"
             >
               Publish Post
             </button>
