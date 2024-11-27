@@ -1,6 +1,6 @@
 import { useAuthStore } from '../../stores/authStore';
-import { PlusCircle, FileText, LogOut } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { PlusCircle, FileText, LogOut, Settings } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 
 const AdminDashboard = () => {
   const { signOut, user } = useAuthStore();
@@ -12,49 +12,64 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900">
-      <nav className="bg-gray-800 border-b border-gray-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <h1 className="text-white text-xl font-bold">Admin Dashboard</h1>
-            </div>
-            <div className="flex items-center">
-              <span className="text-gray-300 mr-4">{user?.email}</span>
-              <button
-                onClick={handleSignOut}
-                className="flex items-center text-gray-300 hover:text-white"
+    <div className="flex min-h-screen bg-gray-900">
+      {/* Sidebar */}
+      <div className="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
+        <div className="flex-grow">
+          <div className="px-6 pt-16 pb-8"> {/* Increased top padding */}
+            <h1 className="text-2xl font-bold text-white mb-12">Admin Dashboard</h1> {/* Increased bottom margin */}
+            <nav className="space-y-6">
+              <Link
+                to="/admin/posts/new"
+                className="flex items-center text-gray-300 hover:text-white transition-colors"
               >
-                <LogOut className="h-5 w-5 mr-2" />
-                Sign Out
-              </button>
+                <PlusCircle className="h-6 w-6 mr-3" />
+                <span>New Post</span>
+              </Link>
+              <Link
+                to="/admin/posts"
+                className="flex items-center text-gray-300 hover:text-white transition-colors"
+              >
+                <FileText className="h-6 w-6 mr-3" />
+                <span>Manage Posts</span>
+              </Link>
+              <Link
+                to="/admin/settings"
+                className="flex items-center text-gray-300 hover:text-white transition-colors"
+              >
+                <Settings className="h-6 w-6 mr-3" />
+                <span>Settings</span>
+              </Link>
+            </nav>
+          </div>
+        </div>
+        <div className="px-6 py-4 border-t border-gray-700">
+          <button
+            onClick={handleSignOut}
+            className="flex items-center text-gray-300 hover:text-white transition-colors"
+          >
+            <LogOut className="h-5 w-5 mr-3" />
+            <span>Sign Out</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex-1">
+        <header className="bg-gray-800 border-b border-gray-700">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex items-center justify-end h-16">
+              <span className="text-gray-300 mr-4">{user?.email}</span>
             </div>
           </div>
-        </div>
-      </nav>
+        </header>
 
-      <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <button
-              onClick={() => navigate('/admin/posts/new')}
-              className="p-6 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
-            >
-              <PlusCircle className="h-8 w-8 text-purple-500 mb-4" />
-              <h3 className="text-lg font-medium text-white">New Post</h3>
-              <p className="mt-2 text-gray-400">Create a new blog post</p>
-            </button>
-
-            <button
-              onClick={() => navigate('/admin/posts')}
-              className="p-6 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors"
-            >
-              <FileText className="h-8 w-8 text-purple-500 mb-4" />
-              <h3 className="text-lg font-medium text-white">Manage Posts</h3>
-              <p className="mt-2 text-gray-400">Edit or delete existing posts</p>
-            </button>
+        <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+          <div className="px-4 py-6 sm:px-0">
+            <h2 className="text-2xl font-semibold text-white mb-6">Welcome to the Admin Dashboard</h2>
+            <p className="text-gray-300">Select an option from the sidebar to get started.</p>
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );

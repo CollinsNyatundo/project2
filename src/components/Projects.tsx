@@ -59,7 +59,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="bg-gray-800 rounded-xl overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-300"
+      className="bg-gray-800 rounded-xl overflow-hidden group hover:transform hover:scale-[1.02] transition-all duration-300 flex flex-col h-full"
     >
       <div className="relative h-48 overflow-hidden">
         <img
@@ -72,11 +72,11 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
         <Icon className="absolute bottom-4 left-4 w-8 h-8 text-white" />
       </div>
 
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-purple-400 transition-colors">
           {project.title}
         </h3>
-        <p className="text-gray-400 mb-4">{project.description}</p>
+        <p className="text-gray-400 mb-4 flex-grow">{project.description}</p>
 
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map((tag, index) => (
@@ -86,7 +86,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
           ))}
         </div>
 
-        <div className="flex gap-4">
+        <div className="mt-auto">
           <a
             href={project.github}
             target="_blank"

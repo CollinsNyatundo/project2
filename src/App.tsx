@@ -11,6 +11,8 @@ import AdminLogin from './components/admin/AdminLogin';
 import AdminLayout from './components/admin/AdminLayout';
 import PostList from './components/admin/PostList';
 import BlogEditor from './components/admin/BlogEditor';
+import AdminProfile from './components/admin/AdminProfile';
+import ProjectManager from './components/admin/ProjectManager'; // Add this import
 
 function App() {
   return (
@@ -40,6 +42,8 @@ function App() {
             <Route path="posts" element={<PostList />} />
             <Route path="posts/new" element={<BlogEditor />} />
             <Route path="posts/:id/edit" element={<BlogEditor />} />
+            <Route path="profile" element={<AdminProfile />} />
+            <Route path="projects" element={<ProjectManager />} /> {/* Add this route */}
           </Route>
         </Routes>
       </div>

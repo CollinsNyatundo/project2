@@ -1,0 +1,29 @@
+.inputField {
+  position: relative;
+}
+
+.inputField::after {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 20px;
+  background-color: #fff;
+  animation: blink 0.7s infinite;
+  opacity: 0;
+}
+
+.inputField:focus-within::after {
+  opacity: 1;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
